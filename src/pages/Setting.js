@@ -7,18 +7,21 @@ import { getSetting, updateSetting } from '../http/setting';
 
 const Setting = observer(() => {
     const [percent, setPercent] = useState('')
+    const [phone, setPhone] = useState('')
+
     useEffect(() => {
         getSetting().then(data => {
             setPercent(data.percent)
+            setPhone(data.phone)
         })
     }, [])
     const updateS = async () => {
         try { 
             let data;
-            data = await updateSetting(percent).then(data => {
-                setPercent(percent)
+            data = await updateSetting(percent,phone).then(data => {
+                setPercent(percent,phone)
             })
-            toast.success(`${percent} ga Yangilandi`, {
+            toast.success(`Ma'lumotlar yangilandi`, {
                 position: "bottom-right",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -41,7 +44,7 @@ const Setting = observer(() => {
     }
     return (
             <Container>
-                <h2>Sozlamalar</h2>
+                <h2 className="text-center">Sozlamalar</h2>
                 <Form>
                     <Row>
                         <Col>
@@ -53,9 +56,18 @@ const Setting = observer(() => {
                                 <Form.Control value={percent} onChange={e => setPercent(e.target.value)}/>
                             </FloatingLabel>
                         </Col>
+                        <Col>
+                            <FloatingLabel
+                                controlId="floatingInput"
+                                label="Qo`llab quvvatlash raqami"
+                                className="mb-3"
+                            >
+                                <Form.Control value={phone} onChange={e => setPhone(e.target.value)}/>
+                            </FloatingLabel>
+                        </Col>
                     </Row>   
                     <Button variant="success" onClick={updateS}>
-                        Yangilandi
+                        Yangilash
                     </Button>     
                 </Form>
                 <ToastContainer />

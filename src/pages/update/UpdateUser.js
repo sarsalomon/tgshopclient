@@ -1,9 +1,9 @@
 import { observer } from 'mobx-react-lite';
-import React, { useContext, useEffect, useState } from 'react';
-import { Container, Row, Col, Button, Form, Dropdown, FloatingLabel, InputGroup, DropdownButton, FormControl } from 'react-bootstrap';
+import React, {  useEffect, useState } from 'react';
+import { Container, Row, Col, Button, Form, FloatingLabel } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { fetchUsers, getUser, updateUser } from '../../http/userAPI';
+import { getUser, updateUser } from '../../http/userAPI';
 import { useParams } from 'react-router';
 
 const UpdateUser = observer(() => {
@@ -14,7 +14,6 @@ const UpdateUser = observer(() => {
     const [subcategoryId,setSubCategory] = useState('')
     const {id} = useParams()
     useEffect(() => {
-        // fetchUsers(id).then(data => setUser(data))
         getUser(id).then(data => {
             setFish(data.fish)
             setPhone(data.phone)
@@ -37,7 +36,7 @@ const UpdateUser = observer(() => {
 
     return (
         <Container>
-        <h2>Update User</h2>
+        <h2>Hodimni yangilash</h2>
         <Form>
             {/* <Row className="mb-4">
                 <Col>
@@ -112,7 +111,7 @@ const UpdateUser = observer(() => {
             <Row>
                 <Col className="float-right">
                     <Button variant="success" onClick={updateU} className="mt-3 float-right d-flex">
-                            UPdate
+                        Yangilash
                     </Button>  
                 </Col>
             </Row>

@@ -9,10 +9,10 @@ const Notfounded = () => {
                     <Col md='4'>
                     </Col>
                     <Col md='4'>
-                    <h1 className=" my-5">Siz qidirgan sahifa yoq</h1>
+                    <h1 className="text-center my-5">Siz qidirgan sahifa mavjud emas</h1>
                     <NavLink to={DASHBOARD_ROUTER}>
                         <div className="d-grid gap-2 my-5">
-                            <Button variant="primary" size="lg">Dash</Button>
+                            <Button variant="primary" size="lg">Bosh sahifaga o`tish</Button>
                         </div>
                     </NavLink>
                     </Col>

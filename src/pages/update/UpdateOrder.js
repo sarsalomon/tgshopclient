@@ -6,14 +6,15 @@ import { Container, Row, Col, Button, Form, FloatingLabel } from 'react-bootstra
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getCategory, getProduct } from '../../http/productApi';
-import { getSubCategory } from '../../http/categoryApi';
-
+import { getUser, getMember } from '../../http/orderApi';
 
 const UpdateOrder = observer(() => {
     const [order, setOrder] = useState({info: []})
     const [category, setCategory] = useState({info: []})
     const [product, setProduct] = useState({info: []})
-    const [subcategory,setSubCategory] = useState('')
+    const [user, setUser] = useState({info: []})
+    const [member, setMember] = useState({info: []})
+
     const [status,setStatus] = useState('')
     const {id} = useParams()
     useEffect(() => {
@@ -28,34 +29,35 @@ const UpdateOrder = observer(() => {
     // console.log(order.serviceId)
     useEffect(() => {
         const interval = setInterval(() => {
-            if(order.categoryId !== undefined && order.productId !== undefined){
+            if(order.categoryId !== undefined && order.productId !== undefined && order.userId !== undefined && order.memberId !== undefined){
                 getCategory(order.categoryId).then(data => {
                         setCategory(data)
                 })
                 getProduct(order.productId).then(data => {
                     setProduct(data)
-
                 })
-                getSubCategory(order.subcategoryId).then(data => {
-                    setSubCategory(data)
+                getUser(order.userId).then(data => {
+                    setUser(data)
+                })
+                getMember(order.memberId).then(data => {
+                    setMember(data)
                 })
             }
         }, 1000);
         return () => clearInterval(interval);
-    }, [order.categoryId, order.productId])
-    console.log(product)
+    }, [order.categoryId, order.productId, order.userId, order.memberId])
+    console.log(member)
     let ptitel = `${product.titleUz} - ${product.titleRu}`
     let ctitel = `${category.titleUz} - ${category.titleRu}`
-    let sctitel = `${subcategory.titleUz} - ${subcategory.titleRu}`
-    // console.log(order.status)
+
     let statusoption
-    if(order.status === 1){
+    if(order.status == 1){
         statusoption = [<option value={order.status}>Qabul qilindi</option>,<option value='2'>обработка</option>,<option value='3'>Usta Yuborildi</option>,<option value='4'>Tugadi</option>]
-    }else if(order.status === 2){
+    }else if(order.status == 2){
         statusoption =[<option value={order.status}>обработка</option>,<option value='1'>Qabul qilindi</option>,<option value='3'>Usta Yuborildi</option>,<option value='4'>Tugadi</option>]
-    }else if(order.status === 3){
+    }else if(order.status == 3){
         statusoption =[<option value={order.status}>Usta Yuborildi</option>,<option value='1'>Qabul qilindi</option>,<option value='2'>обработка</option>,<option value='4'>Tugadi</option>]
-    }else if(order.status === 4){
+    }else if(order.status == 4){
         statusoption =[<option value={order.status}>Tugadi</option>,<option value='1'>Qabul qilindi</option>,<option value='2'>обработка</option>,<option value='3'>Usta Yuborildi</option>]
     }
 
@@ -76,7 +78,7 @@ const UpdateOrder = observer(() => {
 
     const updateC = () => {
         if(order.status  !== ''){
-            updateOrder(id, status, order.ratingstatus).then(data => {})
+            updateOrder(id, product._id, member.chatId, status, order.ratingstatus).then(data => {})
             toast.info(`${id} ni holati yangilandi ${statustext} ga`, {
             position: "bottom-right",
             autoClose: 5000,
@@ -90,11 +92,10 @@ const UpdateOrder = observer(() => {
             console.log('kotini qis')
         }
     }
-
-
+    let urlyandex = `https://yandex.uz/maps/?ll=${member.location_longitude}%2C${member.location_latitude}&mode=whatshere&whatshere%5Bpoint%5D=${member.location_longitude}%2C${member.location_latitude}&whatshere%5Bzoom%5D=14&z=19`
     return (
         <Container>
-            <h2>Buyurtma yangilash</h2>
+            <h2>Buyurtmani yangilash</h2>
             <Form>
                 <Row className="mb-4">
                     <Col>
@@ -104,7 +105,7 @@ const UpdateOrder = observer(() => {
                     <Col>
                         <FloatingLabel
                             controlId="floatingInput"
-                            label="Category"
+                            label="Toifa"
                             className="mb-3">
                             <Form.Control type="text" value={ctitel} disabled/>
                         </FloatingLabel>
@@ -112,9 +113,9 @@ const UpdateOrder = observer(() => {
                     <Col>
                         <FloatingLabel
                             controlId="floatingInput"
-                            label="Sub Category"
+                            label="Mahsulot"
                             className="mb-3">
-                            <Form.Control type="text" value={sctitel} disabled/>
+                            <Form.Control type="text" value={ptitel} disabled/>
                         </FloatingLabel>
                     </Col>
                 </Row>  
@@ -122,17 +123,31 @@ const UpdateOrder = observer(() => {
                     <Col>
                         <FloatingLabel
                             controlId="floatingInput"
-                            label="title"
+                            label="Usta ismi"
                             className="mb-3">
-                            <Form.Control type="text" value={ptitel} disabled/>
+                            <Form.Control type="text" value={user.fish} disabled/>
                         </FloatingLabel>
                     </Col>
                     <Col>
                         <FloatingLabel
                             controlId="floatingInput"
-                            label="memberId"
+                            label="Usta nomeri"
                             className="mb-3">
-                            <Form.Control type="text" value={order.memberId} disabled/>
+                            <Form.Control type="text" value={user.phone} disabled/>
+                        </FloatingLabel>
+                    </Col>
+                </Row>
+                <Row>  
+                    <Col>
+                        <h6>{member.location_longitude}</h6><h6>{member.location_latitude}</h6>
+                        <a href={urlyandex} target="_blank">Yandex Kartada ochish</a>
+                    </Col>
+                    <Col>
+                        <FloatingLabel
+                            controlId="floatingInput"
+                            label="Mijoz raqami"
+                            className="mb-3">
+                            <Form.Control type="text" value={member.phone} disabled/>
                         </FloatingLabel>
                     </Col>
                 </Row>   
@@ -140,10 +155,10 @@ const UpdateOrder = observer(() => {
                     <Col>
                          Narhi
                          <br/>
-                         <span>{order.qty}</span> * <span>{order.newprice}</span> = {order.qty * order.newprice}
+                         <span>{order.qty}</span> * <span>{order.newprice}</span> = <big><b>{order.qty * order.newprice}</b></big>
                     </Col>  
                     <Col>
-                    <Form.Select aria-label="Default select example" 
+                    <Form.Select
                             onChange={(e) => {const updateOrder = e.target.value
                                 setStatus(updateOrder);
                             }}

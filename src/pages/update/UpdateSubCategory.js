@@ -86,7 +86,7 @@ const UpdateSubCategory = observer(() => {
                         </Col>
                     </Row>   
                     <Button variant="success" onClick={updateSC}>
-                        Yangilandi
+                        Yangilash
                     </Button>     
                 </Form>
                 <ToastContainer />

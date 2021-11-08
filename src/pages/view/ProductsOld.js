@@ -1,9 +1,9 @@
 import { observer } from 'mobx-react-lite';
 import React, { useEffect, useState } from 'react';
-import { Container, Button, Form, Row, Col, Table, Image } from 'react-bootstrap';
+import { Container, Button, Form, Row, Col, Table } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import Paginations from '../../components/Paginations';
-import { deleteProduct, fetchProducts, fetchCategories, fetchUsers } from '../../http/productApi';
+import { deleteProduct, fetchProducts, fetchCategories, fetchSubCategories } from '../../http/productApi';
 import { useHistory } from "react-router-dom"
 import { ADD_PRODUCT_ROUTER, GET_PRODUCT_ROUTER } from '../../utils/consts';
 
@@ -11,20 +11,21 @@ const Products = observer(() => {
     const [allItems, setAllItems] = useState([])
     const [categories, setCategories] = useState([])
     const [categoryId,setCategory] = useState('')
-    const [user,setUser] = useState('')
-    const [users,setUsers] = useState([])
+    const [productorservice,setProductOrService] = useState('')
+    const [subcategoryId,setSubCategory] = useState('')
+    const [subcategories,setSubCategories] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
     const [itemsPerPage, setItemsPerPage] = useState(8)
     const history = useHistory()
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            fetchProducts(categoryId,user).then(data=> setAllItems(data))
+        // const interval = setInterval(() => {
+            fetchProducts(categoryId,subcategoryId,productorservice).then(data=> setAllItems(data))
             fetchCategories().then(data => setCategories(data))
-            fetchUsers(categoryId).then(data => setUsers(data))
-        }, 1000);
-        return () => clearInterval(interval);
-    }, [categoryId,user]);
+            fetchSubCategories(categoryId).then(data => setSubCategories(data))
+        // }, 5000);
+        // return () => clearInterval(interval);
+    }, [categoryId,subcategoryId,productorservice]);
 
     const lastItemIndex = currentPage * itemsPerPage
     const firstItemIndex = lastItemIndex - itemsPerPage
@@ -78,19 +79,30 @@ const Products = observer(() => {
                         </Form.Select>
                     </Col>
                     <Col>
-                    <Form.Select aria-label="Default select example" 
-                            onChange={(e) => {const seletcedUser = e.target.value
-                                setUser(seletcedUser);
+                        <Form.Select aria-label="Default select example" 
+                            onChange={(e) => {const seletcedSubCategory = e.target.value
+                                setSubCategory(seletcedSubCategory);
                             }}
                         >
                          <option value={''}>Hammasi</option>
-                            {users.map(user =>
+                            {subcategories.map(category =>
                                 <option 
-                                    value={user._id}
+                                    value={category._id}
                                 >
-                                   {user.fish}
+                                   {category.titleUz} - {category.titleRu}
                                 </option>
                             )}
+                        </Form.Select>
+                    </Col>
+                    <Col>
+                        <Form.Select aria-label="Default select example" 
+                                onChange={(e) => {const seletcedProductOrService = e.target.value
+                                    setProductOrService(seletcedProductOrService);
+                                }}
+                            >  
+                            <option value={''}>Hammasi</option>
+                            <option value={'1'}>Service</option>
+                            <option value={'2'}>Product</option>
                         </Form.Select>
                     </Col>
                     <Col>
@@ -133,11 +145,13 @@ const Products = observer(() => {
                                     <td>{cpi + index + 1}</td>
                                     <td>{product.titleRu}<br/>
                                         {product.titleUz}</td>
-                                    <td>{product.categoryId}</td>
+                                    <td>{product.subcategoryId}<br/>
+                                    {product.subcategoryId}</td>
                                     <td>{product.descriptionUz.length > 60 ? `${product.descriptionUz.substring(0, 60)}...` : product.descriptionUz}<br/>
                                         {product.descriptionRu.length > 60 ?`${product.descriptionRu.substring(0, 60)}...` : product.descriptionRu}</td>
-                                    <td>{product.newprice}</td>
-                                    <td> <Image width={100} height={100} src={process.env.REACT_APP_API_URL + product.img} alt={product.titleUz + ' - ' + product.titleRu}/> </td>
+                                    <td>{product.price}</td>
+                                    {/* <td> <Image width={150} height={80} src={process.env.REACT_APP_API_URL + item.img} alt={item.img}/> </td> */}
+                                    <td> 1 </td>
                                     <td>
                                         <Button variant="primary" onClick={() => history.push(GET_PRODUCT_ROUTER + '/'+product._id)}>Yangilash</Button>
                                         <Button variant="danger" className="ms-2" onClick={() => deleteP(product._id)}>O`chirish</Button>

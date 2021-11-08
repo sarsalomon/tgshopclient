@@ -49,7 +49,7 @@ const AddCategory = () => {
                     </Col>
                 </Row>   
                 <Button variant="success" onClick={addC} type="reset">
-                        Add
+                        Qo`shish
                 </Button>     
             </Form>
             <ToastContainer />

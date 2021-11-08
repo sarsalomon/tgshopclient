@@ -5,22 +5,23 @@ export const createProduct = async (category) => {
     return data
 }
 
-export const fetchProducts = async (categoryId, subcategoryId, productorservice) => {
+export const fetchProducts = async (categoryId, user) => {
     const {data} = await $authHost.get('api/product', {params: {
-            categoryId, subcategoryId, productorservice
+            categoryId, user
         }})
     return data
 }
 
-export const fetchUsers = async (categoryId, subcategoryId) => {
+
+export const fetchUsers = async (categoryId) => {
     const {data} = await $authHost.get('api/user/search', {params: {
-            categoryId, subcategoryId
+            categoryId
         }})
     return data
 }
 
-export const updateProduct = async (id, titleUz, titleRu, price, categoryId, subcategoryId, descriptionUz, descriptionRu, сurrency, productorservice, item)  =>{
-    const {data} = await $authHost.post('api/product/updateproduct', {id, titleUz, titleRu, price, categoryId, subcategoryId, descriptionUz, descriptionRu, сurrency, productorservice, item})
+export const updateProduct = async (category)  =>{
+    const {data} = await $authHost.post('api/product/updateproduct', category)
     return data
 }
 
@@ -36,11 +37,6 @@ export const deleteProduct = async (id)  =>{
 
 export const fetchCategories = async () => {
     const {data} = await $authHost.get('api/category')
-    return data
-}
-
-export const fetchSubCategories = async (categoryId)  =>{
-    const {data} = await $authHost.get('api/product/getsubcategory/' + categoryId)
     return data
 }
 

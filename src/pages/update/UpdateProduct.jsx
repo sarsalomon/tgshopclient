@@ -1,10 +1,10 @@
 import { observer } from 'mobx-react-lite';
 import React, {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom'
-import { Container, Row, Col, Button, Form, Dropdown, FloatingLabel, InputGroup, DropdownButton, FormControl } from 'react-bootstrap';
+import { Container, Row, Col, Button, Form, FloatingLabel, InputGroup, FormControl } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { getProduct, updateProduct, fetchCategories, fetchSubCategories, fetchUsers } from '../../http/productApi';
+import { getProduct, updateProduct, fetchCategories, fetchUsers } from '../../http/productApi';
 
 const UpdateProduct = observer(() => {
     const [сategories, setCategories] = useState([])
@@ -13,14 +13,11 @@ const UpdateProduct = observer(() => {
     const [price,setPrice] = useState('')
     const [file,setFile] = useState('')
     const [categoryId,setCategory] = useState('')
-    const [subcategoryId,setSubCategory] = useState('')
     const [descriptionUz,setDescriptionUz] = useState('')
     const [descriptionRu,setDescriptionRu] = useState('')
-    const [subcategories,setSubCategories] = useState([])
     const [userId,setUserId] = useState('')
     const [users,setUsers] = useState([])
     const [сurrency,setСurrency] = useState('')
-    const [item,setItem] = useState('')
     const [productorservice,setProductOrService] = useState('')
 
     const {id} = useParams()
@@ -30,9 +27,7 @@ const UpdateProduct = observer(() => {
                 setTitleRu(data.titleRu)
                 setPrice(data.price)
                 setCategory(data.categoryId)
-                setSubCategory(data.subcategoryId)
                 setСurrency(data.сurrency)
-                setItem(data.item)
                 setProductOrService(data.productorservice)
                 setDescriptionUz(data.descriptionUz)
                 setDescriptionRu(data.descriptionRu)
@@ -42,20 +37,30 @@ const UpdateProduct = observer(() => {
     useEffect(() => {
         const interval = setInterval(() => {
             fetchCategories().then(data => setCategories(data))
-            fetchSubCategories(categoryId).then(data => setSubCategories(data))
-            fetchUsers(categoryId,subcategoryId).then(data => setUsers(data))
+            fetchUsers(categoryId).then(data => setUsers(data))
         }, 1000);
         return () => clearInterval(interval);
-    }, [categoryId,subcategoryId,сurrency,item,productorservice])
+    }, [categoryId])
 
-    const selectFile = e => { 
+    const selectFile = e => {
         setFile(e.target.files[0])
     }
+   
 
-
-    const updateP = () => {
-        updateProduct(id, titleUz, titleRu, price, categoryId, subcategoryId, descriptionUz, descriptionRu, userId, сurrency, productorservice, item).then(data => {})
-        toast.info(`${id}`, {
+    const updateP = async () => {
+        let data;
+        const formData = new FormData()
+        formData.append('id', id)
+        formData.append('titleUz', titleUz)
+        formData.append('titleRu', titleRu)
+        formData.append('userId', userId)
+        formData.append('price', price)
+        formData.append('img', file)
+        formData.append('categoryId', categoryId)
+        formData.append('descriptionUz', descriptionUz)
+        formData.append('descriptionRu', descriptionRu)
+        data = await updateProduct(formData)
+        toast.success(`Yangilandi`, {
             position: "bottom-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -68,7 +73,7 @@ const UpdateProduct = observer(() => {
  
     return (
         <Container>
-        <h2>Update Product</h2>
+        <h2>Mahsulot yangilash</h2>
         <Form>
             <Row className="mb-4">
             <Col>
@@ -88,24 +93,6 @@ const UpdateProduct = observer(() => {
                         </Form.Select>
                     </Col>
                     <Col>
-                        <Form.Select
-                            onChange={(e) => {const seletcedSubCategory = e.target.value
-                                setSubCategory(seletcedSubCategory);
-                            }}
-                        >
-                         <option value={''}>Sub</option>
-                            {subcategories.map(category =>
-                                <option 
-                                    value={category._id}
-                                >
-                                   {category.titleUz} - {category.titleRu}
-                                </option>
-                            )}
-                        </Form.Select>
-                    </Col>
-                </Row> 
-                <Row className="mb-4">
-                    <Col>
                         <Form.Select aria-label="Default select example" 
                             onChange={(e) => {const seletcedUser = e.target.value
                                 setUserId(seletcedUser);
@@ -119,28 +106,6 @@ const UpdateProduct = observer(() => {
                                    {user.fish}
                                 </option>
                             )}
-                        </Form.Select>
-                    </Col>
-                    <Col>
-                        <Form.Select aria-label="Default select example" 
-                                onChange={(e) => {const seletcedProductOrService = e.target.value
-                                    setProductOrService(seletcedProductOrService);
-                                }}
-                            >
-                                {(() => {
-                                    
-                                    if (productorservice == 1) {
-                                        console.log(productorservice)
-                                        return (
-                                            [<option value={productorservice}>Xizmat</option>,<option value='2'>Mahsulot</option>]
-                                        )
-                                    } else if (productorservice == 2) {
-                                        console.log(productorservice)
-                                        return (
-                                            [<option value={productorservice}>Mahsulot</option>,<option value='1'>Xizmat</option>]
-                                        )
-                                    } 
-                                })()}
                         </Form.Select>
                     </Col>
             </Row>   
@@ -165,58 +130,16 @@ const UpdateProduct = observer(() => {
                 </Col>
             </Row>   
             <Row>
-                <Col md={3}>
+                <Col md={5}>
                     <Form.Group controlId="formFile" className="mb-3">
-                        <Form.Label>Img</Form.Label>
+                        <Form.Label>Rasn</Form.Label>
                         <Form.Control type="file" onChange={selectFile}/>
                     </Form.Group> 
                 </Col>
-                <Col md={9}>
-                    <Form.Label>Price</Form.Label>
+                <Col md={7}>
+                    <Form.Label>Narhi</Form.Label>
                         <InputGroup className="mb-3">
                             <FormControl type="text" value={price} onChange={e=>setPrice(e.target.value)} />
-                            <Form.Select 
-                                onChange={(e) => {const seletcedСurrency = e.target.value
-                                    setСurrency(seletcedСurrency);
-                                }}
-                            >
-                                {(() => {
-                                    if (сurrency == 1) {
-                                        return (
-                                            [<option value={сurrency}>Som</option>,<option value='2'>$</option>]
-                                    )
-                                    } else if (сurrency == 2) {
-                                        return (
-                                            [<option value={сurrency}>$</option>,<option value='1'>Som</option>,]
-                                        )
-                                    } else {
-                                        return (
-                                            <div>catch all</div>
-                                        )
-                                    }
-                                })()}
-                            </Form.Select>
-                            <Form.Select
-                                onChange={(e) => {const seletcedItem = e.target.value
-                                    setItem(seletcedItem);
-                                }}
-                            >
-                                {(() => {
-                                    if (item == 1) {
-                                        return (
-                                            [<option value={item}>dona</option>,<option value='2'>kg</option>]
-                                    )
-                                    } else if (item == 2) {
-                                        return (
-                                            [<option value={item}>kg</option>,<option value='1'>dona</option>]
-                                        )
-                                    } else {
-                                        return (
-                                            <div>catch all</div>
-                                        )
-                                    }
-                                })()}
-                            </Form.Select>
                     </InputGroup>
                 </Col>
                 </Row>  

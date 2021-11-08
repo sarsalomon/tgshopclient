@@ -37,7 +37,7 @@ const UpdateCategory = observer(() => {
 
     return (
             <Container>
-                <h2>Update Category</h2>
+                <h2>Toifani yangilash</h2>
                 <Form>
                     <Row>
                         <Col>
@@ -60,7 +60,7 @@ const UpdateCategory = observer(() => {
                         </Col>
                     </Row>   
                     <Button variant="success" onClick={updateC}>
-                        Yangilandi
+                        Yangilash
                     </Button>     
                 </Form>
                 <ToastContainer />

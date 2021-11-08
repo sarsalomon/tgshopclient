@@ -7,31 +7,28 @@ import { useHistory } from "react-router-dom"
 import { ADD_USER_ROUTER, GET_USER_ROUTER } from '../../utils/consts';
 import { deleteUser, fetchCategories, fetchUsers } from '../../http/userAPI';
 
+
 const Users = observer(() => {
     const [allUsers, setAllUsers] = useState([])
     const [categories, setCategories] = useState([])
     const [categoryId,setCategory] = useState('')
-    const [loading, setLoading] = useState(false)
     const [currentPage, setCurrentPage] = useState(1)
     const [itemsPerPage, setItemsPerPage] = useState(9)
     const history = useHistory()
-
+    
     useEffect(() => {
-        const interval = setInterval(() => {
-            setLoading(true)
-            fetchUsers().then(data=> setAllUsers(data))
+        // const interval = setInterval(() => {
+            fetchUsers(categoryId).then(data=> setAllUsers(data))
             fetchCategories().then(data => setCategories(data))
-            setLoading(false)
-        }, 1000);
-        return () => clearInterval(interval);
-      }, []);
+        // }, 1000);
+        // return () => clearInterval(interval);
+      }, [categoryId]);
  
     const lastItemIndex = currentPage * itemsPerPage
     const firstItemIndex = lastItemIndex - itemsPerPage
     const currentItem = allUsers.slice(firstItemIndex, lastItemIndex)
 
     const paginate = pageNumber => setCurrentPage(pageNumber)
-    console.log(categoryId)
     let paginates = null
     if(allUsers.length>5){
       paginates =  <Paginations
@@ -51,7 +48,7 @@ const Users = observer(() => {
             <Container>
                 <Row>
                     <Col>
-                    <NavLink to={ADD_USER_ROUTER}><Button variant='success'>Add Users</Button></NavLink>
+                    <NavLink to={ADD_USER_ROUTER}><Button variant='success'>Hodim qo`shish</Button></NavLink>
                     </Col>
                     <Col>
                         <Form.Select aria-label="Default select example" 
@@ -59,12 +56,12 @@ const Users = observer(() => {
                                 setCategory(seletcedCategory);
                             }}
                         >  
-                         <option value={''}>Category</option>
+                         <option value={''}>Toifa</option>
                             {categories.map(category =>
                                 <option 
                                     value={category._id}
                                 >
-                                    {category.titleRu}
+                                    {category.titleUz} - {category.titleRu}
                                 </option>
                             )}
                         </Form.Select>
@@ -93,16 +90,15 @@ const Users = observer(() => {
                     <thead>
                         <tr>
                             <th width="1%">#</th>
-                            <th>Name</th>
-                            <th>Category</th>
-                            <th>Desc</th>
-                            <th>Price</th>
-                            <th>Action</th>
+                            <th>Ismi</th>
+                            <th>Telefon</th>
+                            <th>Toifa</th>
+                            <th>Harakat</th>
                         </tr>
                     </thead>
                     <tbody>
                         {    
-                            allUsers.map((user, index) => 
+                            currentItem.map((user, index) => 
                      
                                 <tr
                                 key={user._id}
@@ -111,10 +107,9 @@ const Users = observer(() => {
                                     <td>{user.fish}</td>
                                     <td>{user.phone}</td>
                                     <td>{user.role}</td>
-                                    <td> 1 </td>
                                     <td>
-                                        <Button variant="primary" onClick={() => history.push(GET_USER_ROUTER + '/'+user._id)}>view</Button>
-                                        <Button variant="danger" className="ms-2" onClick={() => deleteU(user._id)}>delete</Button>
+                                        <Button variant="primary" onClick={() => history.push(GET_USER_ROUTER + '/'+user._id)}>Yangilash</Button>
+                                        <Button variant="danger" className="ms-2" onClick={() => deleteU(user._id)}>O`chirish</Button>
                                     </td>
                                 </tr>
                            )

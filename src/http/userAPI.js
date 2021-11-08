@@ -19,8 +19,8 @@ export const check = async () => {
     return jwt_decode(data.token)
 }
 
-export const addUser = async (login, password, categoryId, subcategoryId, fish, phone, role) =>{
-    const {data} = await $authHost.post('api/user/adduser', {login, password, categoryId, subcategoryId, fish, phone, role})
+export const addUser = async (login, password, categoryId, fish, phone, role) =>{
+    const {data} = await $authHost.post('api/user/adduser', {login, password, categoryId, fish, phone, role})
     return data
 }
 
@@ -34,8 +34,10 @@ export const updateUser = async (id, titleUz, titleRu, price, categoryId, subcat
     return data
 }
 
-export const fetchUsers = async () =>{
-    const {data} = await $authHost.get('api/user')
+export const fetchUsers = async (categoryId, subcategoryId) =>{
+    const {data} = await $authHost.get('api/user', {params: {
+        categoryId, subcategoryId
+    }})
     return data
 }
 
@@ -54,8 +56,7 @@ export const fetchCategories = async () => {
     return data
 }
 
-export const fetchSubCategories = async () => {
-    const {data} = await $authHost.get('api/category')
+export const fetchSubCategories = async (categoryId)  =>{
+    const {data} = await $authHost.get('api/product/getsubcategory/' + categoryId)
     return data
 }
-

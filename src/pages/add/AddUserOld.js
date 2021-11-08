@@ -22,12 +22,13 @@ const AddUser = observer(() => {
 
     useEffect(() => {
             fetchCategories().then(data => setCategories(data))
-    }, [])
+            fetchSubCategories(categoryId).then(data => setSubCategories(data))
+    }, [categoryId])
 
     const click = async ()=>{
         try{
             let data;
-            data = await addUser(login, password, categoryId, fish, phone, role)
+            data = await addUser(login, password, categoryId, subcategoryId, fish, phone, role)
             toast.success(`${fish} qo'shildi ${role} sifatida`, {
                 position: "bottom-right",
                 autoClose: 5000,
@@ -71,7 +72,7 @@ const AddUser = observer(() => {
                             )}
                         </Form.Select>
                     </Col>
-                    {/* <Col>
+                    <Col>
                     <Form.Select aria-label="Default select example" 
                             onChange={(e) => {const seletcedSubCategory = e.target.value
                                 setSubCategory(seletcedSubCategory);
@@ -86,7 +87,7 @@ const AddUser = observer(() => {
                                 </option>
                             )}
                         </Form.Select>
-                    </Col> */}
+                    </Col>
                 </Row>   
                 <Row>
                     <Col>

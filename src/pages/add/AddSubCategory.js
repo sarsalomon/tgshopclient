@@ -48,7 +48,7 @@ const AddSubCategory = () => {
 
     return (
         <Container>
-        <h2>Sub Category</h2>
+        <h2>Sub qo`shish</h2>
          <Form>
             <Row className="my-4">
                 <Col>
@@ -57,7 +57,7 @@ const AddSubCategory = () => {
                             setCategory(seletcedCategory);
                         }}
                         >  
-                        <option value={''}>Category</option>
+                        <option value={''}>Toifa</option>
                             {categories.map(category =>
                                 <option 
                                     value={category._id}
@@ -91,7 +91,7 @@ const AddSubCategory = () => {
                 </Col>
             </Row>   
             <Button variant="success" onClick={addSC} type="reset">
-                    Add
+                Qo`shish
             </Button>     
         </Form>
         <ToastContainer />

@@ -17,11 +17,11 @@ const Auth = observer(() => {
     if (reg===true) {
         if(isLogin){
             reg = <div>
-                Not Account? <NavLink to={REGISTRATION_ROUTER}>Reg</NavLink>
+                <NavLink to={REGISTRATION_ROUTER}>Ro`yxatdan o`tish</NavLink>
             </div>
         }else{
             reg = <div>
-                Yes Account? <NavLink to={LOGIN_ROUTER}>Login</NavLink>
+                <NavLink to={LOGIN_ROUTER}>Tizimga kirish</NavLink>
             </div>
         }
     }
@@ -47,20 +47,20 @@ const Auth = observer(() => {
             style={{height: window.innerHeight-54}}
         >
             <Card style={{width:600}} className="p-5">
-                <h2 className="m-auto">{isLogin ? 'Login' : "Reg"}</h2>
+                <h2 className="m-auto">{isLogin ? 'Tizimga kirish' : "Ro`yxatdan o`tish"}</h2>
                 <Form className="d-flex flex-column">
                     <Form.Control 
                         className="mt-2"
-                        placeholder="Enter login"
+                        placeholder="Logini yozing"
                         value={login}
                         onChange={e => setLogin(e.target.value)}
                     />
                     <Form.Control 
                         className="mt-4"
-                        placeholder="Enter password"
+                        placeholder="Parolni yozing"
                         value={password}
                         onChange={e => setPassword(e.target.value)}
-                        // type="password"
+                        type="password"
                     />
                     <Row className="d-flex justify-content-between mt-3 pl-3 pr-3">
                        {
@@ -72,7 +72,7 @@ const Auth = observer(() => {
                         variant={'success'}
                         className="mt-4"
                     >
-                        {isLogin ? 'login' : 'Reg'}
+                        {isLogin ? 'Kirish' : 'Ro`yxatdan o`tish'}
                     </Button>
                 </Form>
             </Card>
