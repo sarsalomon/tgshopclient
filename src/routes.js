@@ -8,17 +8,19 @@ import Dashboard from "./pages/Dashboard"
 import Notfounded from "./pages/Notfounded"
 import Setting from "./pages/Setting"
 import UpdateCategory from "./pages/update/UpdateCategory"
+import UpdateHistory from "./pages/update/UpdateHistory"
 import UpdateOrder from "./pages/update/UpdateOrder"
 import UpdateProduct from "./pages/update/UpdateProduct"
 import UpdateSubCategory from "./pages/update/UpdateSubCategory"
 import UpdateUser from "./pages/update/UpdateUser"
 import Categories from "./pages/view/Categories"
+import Histories from "./pages/view/Histories"
 import Members from "./pages/view/Members"
 import Orders from "./pages/view/Orders"
 import Products from "./pages/view/Products"
 import Services from "./pages/view/Services"
 import Users from "./pages/view/Users"
-import { ADD_CATEGORY_ROUTE, ADD_PRODUCT_ROUTER, ADD_SERVICE_ROUTE, ADD_SUBCATEGORY_ROUTE, ADD_USER_ROUTER, CATEGORY_ROUTER, DASHBOARD_ROUTER, GET_CATEGORY_ROUTER, GET_ORDER_ROUTER, GET_PRODUCT_ROUTER, GET_SUBCATEGORY_ROUTER, GET_USER_ROUTER, LOGIN_ROUTER, MEMBER_ROUTER, NOTFOUNDED_ROUTER, ORDER_ROUTER, PRODUCT_ROUTER, REGISTRATION_ROUTER, SERVICE_ROUTER, SETTING_ROUTER, USER_ROUTER } from "./utils/consts"
+import { ADD_CATEGORY_ROUTE, ADD_PRODUCT_ROUTER, ADD_SERVICE_ROUTE, ADD_SUBCATEGORY_ROUTE, ADD_USER_ROUTER, CATEGORY_ROUTER, DASHBOARD_ROUTER, GET_CATEGORY_ROUTER, GET_HISTORY_ROUTER, GET_ORDER_ROUTER, GET_PRODUCT_ROUTER, GET_SUBCATEGORY_ROUTER, GET_USER_ROUTER, HISTORY_ROUTER, LOGIN_ROUTER, MEMBER_ROUTER, NOTFOUNDED_ROUTER, ORDER_ROUTER, PRODUCT_ROUTER, REGISTRATION_ROUTER, SERVICE_ROUTER, SETTING_ROUTER, USER_ROUTER } from "./utils/consts"
 
 export const authRoutes = [
     {
@@ -52,6 +54,10 @@ export const authRoutes = [
     {
         path: ORDER_ROUTER,
         Component: Orders
+    },    
+    {
+        path: HISTORY_ROUTER,
+        Component: Histories
     },
     {
         path: CATEGORY_ROUTER,
@@ -96,6 +102,10 @@ export const authRoutes = [
     {
         path: GET_USER_ROUTER + '/:id',
         Component: UpdateUser
+    },
+    {
+        path: GET_HISTORY_ROUTER + '/:id',
+        Component: UpdateHistory
     },
     {
         path: NOTFOUNDED_ROUTER,

@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import React, {  useEffect, useState } from 'react';
 import { Container, Row, Col, Button, Form, FloatingLabel } from 'react-bootstrap';
-import { fetchCategories, fetchSubCategories } from '../../http/productApi';
+import { fetchCategories } from '../../http/productApi';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { addUser } from '../../http/userAPI';
@@ -9,16 +9,12 @@ import { addUser } from '../../http/userAPI';
 
 const AddUser = observer(() => {
     const [categories, setCategories] = useState([])
-    const [subcategories,setSubCategories] = useState([])
     const [fish,setFish] = useState('')
     const [phone,setPhone] = useState('')
     const [categoryId,setCategory] = useState('')
-    const [subcategoryId,setSubCategory] = useState('')
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
     const [role,setRole] = useState('')
-
-
 
     useEffect(() => {
             fetchCategories().then(data => setCategories(data))
@@ -71,22 +67,6 @@ const AddUser = observer(() => {
                             )}
                         </Form.Select>
                     </Col>
-                    {/* <Col>
-                    <Form.Select aria-label="Default select example" 
-                            onChange={(e) => {const seletcedSubCategory = e.target.value
-                                setSubCategory(seletcedSubCategory);
-                            }}
-                        >
-                         <option value={''}>Sub</option>
-                            {subcategories.map(subcategory =>
-                                <option 
-                                    value={subcategory._id}
-                                >
-                                     {subcategory.titleUz} - {subcategory.titleRu}
-                                </option>
-                            )}
-                        </Form.Select>
-                    </Col> */}
                 </Row>   
                 <Row>
                     <Col>

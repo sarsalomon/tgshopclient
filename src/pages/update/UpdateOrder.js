@@ -26,9 +26,9 @@ const UpdateOrder = observer(() => {
         return () => clearInterval(interval);
     }, [])
     
-    // console.log(order.serviceId)
+
     useEffect(() => {
-        const interval = setInterval(() => {
+        // const interval = setInterval(() => {
             if(order.categoryId !== undefined && order.productId !== undefined && order.userId !== undefined && order.memberId !== undefined){
                 getCategory(order.categoryId).then(data => {
                         setCategory(data)
@@ -43,29 +43,29 @@ const UpdateOrder = observer(() => {
                     setMember(data)
                 })
             }
-        }, 1000);
-        return () => clearInterval(interval);
+        // }, 1000);
+        // return () => clearInterval(interval);
     }, [order.categoryId, order.productId, order.userId, order.memberId])
-    console.log(member)
+
     let ptitel = `${product.titleUz} - ${product.titleRu}`
     let ctitel = `${category.titleUz} - ${category.titleRu}`
 
     let statusoption
     if(order.status == 1){
-        statusoption = [<option value={order.status}>Qabul qilindi</option>,<option value='2'>обработка</option>,<option value='3'>Usta Yuborildi</option>,<option value='4'>Tugadi</option>]
+        statusoption = [<option value={order.status}>Qabul qilindi</option>,<option value='2'>Jarayonda</option>,<option value='3'>Usta Yuborildi</option>,<option value='4'>Tugadi</option>]
     }else if(order.status == 2){
-        statusoption =[<option value={order.status}>обработка</option>,<option value='1'>Qabul qilindi</option>,<option value='3'>Usta Yuborildi</option>,<option value='4'>Tugadi</option>]
+        statusoption =[<option value={order.status}>Jarayonda</option>,<option value='1'>Qabul qilindi</option>,<option value='3'>Usta Yuborildi</option>,<option value='4'>Tugadi</option>]
     }else if(order.status == 3){
-        statusoption =[<option value={order.status}>Usta Yuborildi</option>,<option value='1'>Qabul qilindi</option>,<option value='2'>обработка</option>,<option value='4'>Tugadi</option>]
+        statusoption =[<option value={order.status}>Usta Yuborildi</option>,<option value='1'>Qabul qilindi</option>,<option value='2'>Jarayonda</option>,<option value='4'>Tugadi</option>]
     }else if(order.status == 4){
-        statusoption =[<option value={order.status}>Tugadi</option>,<option value='1'>Qabul qilindi</option>,<option value='2'>обработка</option>,<option value='3'>Usta Yuborildi</option>]
+        statusoption =[<option value={order.status}>Tugadi</option>,<option value='1'>Qabul qilindi</option>,<option value='2'>Jarayonda</option>,<option value='3'>Usta Yuborildi</option>]
     }
 
     let statustext
     if(order.status === 1){
         statustext = 'Qabul qilindi'
     }else if(order.status === 2){
-        statustext = 'обработка'
+        statustext = 'Jarayonda'
     }else if(order.status === 3){
         statustext = 'Usta Yuborildi'
     }else if(order.status === 4){
@@ -75,21 +75,27 @@ const UpdateOrder = observer(() => {
     if(status === ''){
        setStatus('1')
     }
-
     const updateC = () => {
         if(order.status  !== ''){
-            updateOrder(id, product._id, member.chatId, status, order.ratingstatus).then(data => {})
+            updateOrder(id, product._id, member.chatId, status).then(data => {})
             toast.info(`${id} ni holati yangilandi ${statustext} ga`, {
-            position: "bottom-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-        });
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
+            if(updateOrder){
+                if(status == 4){
+                    console.log('ew')
+                    // window.location.href = process.env.REACT_APP_API_URL + 'order';
+                    window.location.href = 'http://localhost:3000/order';
+                }
+            }
         }else{
-            console.log('kotini qis')
+
         }
     }
     let urlyandex = `https://yandex.uz/maps/?ll=${member.location_longitude}%2C${member.location_latitude}&mode=whatshere&whatshere%5Bpoint%5D=${member.location_longitude}%2C${member.location_latitude}&whatshere%5Bzoom%5D=14&z=19`

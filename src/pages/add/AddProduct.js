@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite';
 import React, { useContext, useEffect, useState } from 'react';
 import { Container, Row, Col, Button, Form, FloatingLabel, InputGroup, FormControl } from 'react-bootstrap';
 import { Context } from '../..';
-import { createProduct, fetchCategories, fetchSubCategories, fetchUsers } from '../../http/productApi';
+import { createProduct, fetchCategories, fetchUsers } from '../../http/productApi';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -28,7 +28,7 @@ const AddProduct = observer(() => {
     const selectFile = e => { 
         setFile(e.target.files[0])
     }
-    console.log(file)
+
     const addDevice = async () => {
         try { 
             let data;

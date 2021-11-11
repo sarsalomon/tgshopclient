@@ -65,10 +65,10 @@ const Categories = observer(() => {
         <div>
             <Container>
                 <Row>
-                    <Col>
+                    <Col sm={12} md={3}>
                     <NavLink to={ADD_CATEGORY_ROUTE}><Button variant='success'>Toifa qo`shish</Button></NavLink>
                     </Col>
-                    <Col>
+                    <Col sm={12} md={3}>
                         <Form.Select aria-label="Default select example" 
                                 onChange={(e) => {const seletcedCategory = e.target.value
                                     setItemsPerPage(seletcedCategory);

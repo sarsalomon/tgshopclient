@@ -29,8 +29,8 @@ export const createUser = async (user) => {
     return data
 }
 
-export const updateUser = async (id, titleUz, titleRu, price, categoryId, subcategoryId, userId, descriptionUz, descriptionRu)  =>{
-    const {data} = await $authHost.post('api/product/updateproduct', {id, titleUz, titleRu, price, categoryId, subcategoryId, userId, descriptionUz, descriptionRu})
+export const updateUser = async (id, fish, role, categoryId)  =>{
+    const {data} = await $authHost.post('api/user/updateuser', {id, fish, role, categoryId})
     return data
 }
 

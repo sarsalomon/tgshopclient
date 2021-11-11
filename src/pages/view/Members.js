@@ -46,7 +46,7 @@ const Members = observer(() => {
                     </Col>
                     <Col>
                     </Col>
-                    <Col>
+                    <Col sm={12} md={3}>
                         <Form.Select aria-label="Default select example" 
                                 onChange={(e) => {const seletcedCategory = e.target.value
                                     setItemsPerPage(seletcedCategory);

@@ -26,7 +26,7 @@ const Categories = observer(() => {
       }, [categoryId]);
 
     
-    // console.log(categories)
+
     let setsubcategory = false
     if(categoryId !== ''){
         setsubcategory = true 

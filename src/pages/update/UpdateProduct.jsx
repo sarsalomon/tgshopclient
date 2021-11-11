@@ -17,8 +17,6 @@ const UpdateProduct = observer(() => {
     const [descriptionRu,setDescriptionRu] = useState('')
     const [userId,setUserId] = useState('')
     const [users,setUsers] = useState([])
-    const [сurrency,setСurrency] = useState('')
-    const [productorservice,setProductOrService] = useState('')
 
     const {id} = useParams()
     useEffect(() => {
@@ -27,8 +25,6 @@ const UpdateProduct = observer(() => {
                 setTitleRu(data.titleRu)
                 setPrice(data.price)
                 setCategory(data.categoryId)
-                setСurrency(data.сurrency)
-                setProductOrService(data.productorservice)
                 setDescriptionUz(data.descriptionUz)
                 setDescriptionRu(data.descriptionRu)
             })

@@ -7,8 +7,8 @@ export const fetchOrders = async (categoryId, user, status) => {
     return data
 }
 
-export const updateOrder = async (id, productId, chatId, status, ratingstatus)  =>{
-    const {data} = await $authHost.post('api/order/updateorder', {id, productId, chatId, status, ratingstatus})
+export const updateOrder = async (id, productId, chatId, status)  =>{
+    const {data} = await $authHost.post('api/order/updateorder', {id, productId, chatId, status})
     return data
 }
 

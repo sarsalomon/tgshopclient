@@ -38,17 +38,17 @@ const Services = observer(() => {
         deleteService(id)
     }
     const fnC = (id) => {
-        console.log(id)
+
         fetchCategoryName(id)
     }
     return (
         <div>
             <Container>
             <Row>
-                    <Col>
+                    <Col sm="12">
                     <NavLink to={ADD_SERVICE_ROUTE}><Button variant='success'>Add Service</Button></NavLink>
                     </Col>
-                    <Col>
+                    <Col sm="12">
                         <Form.Select
                                 onChange={(e) => {const seletcedCategory = e.target.value
                                     setItemsPerPage(seletcedCategory);
@@ -65,7 +65,7 @@ const Services = observer(() => {
                                 )}
                         </Form.Select>
                     </Col>
-                    <Col>
+                    <Col sm="12">
                         <Form.Select aria-label="Default select example" 
                                 onChange={(e) => {const seletcedCategory = e.target.value
                                     setItemsPerPage(seletcedCategory);
@@ -83,7 +83,7 @@ const Services = observer(() => {
                         </Form.Select>
                     </Col>
                     
-                    <Col>
+                    <Col sm="12">
                         <Form.Select aria-label="Default select example" 
                                 onChange={(e) => {const seletcedCategory = e.target.value
                                     setItemsPerPage(seletcedCategory);

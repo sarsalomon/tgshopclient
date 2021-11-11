@@ -17,11 +17,11 @@ const Users = observer(() => {
     const history = useHistory()
     
     useEffect(() => {
-        // const interval = setInterval(() => {
+        const interval = setInterval(() => {
             fetchUsers(categoryId).then(data=> setAllUsers(data))
             fetchCategories().then(data => setCategories(data))
-        // }, 1000);
-        // return () => clearInterval(interval);
+        }, 1000);
+        return () => clearInterval(interval);
       }, [categoryId]);
  
     const lastItemIndex = currentPage * itemsPerPage
@@ -47,10 +47,10 @@ const Users = observer(() => {
         <div>
             <Container>
                 <Row>
-                    <Col>
+                    <Col sm={12} md={4}>
                     <NavLink to={ADD_USER_ROUTER}><Button variant='success'>Hodim qo`shish</Button></NavLink>
                     </Col>
-                    <Col>
+                    <Col sm={12} md={4}>
                         <Form.Select aria-label="Default select example" 
                             onChange={(e) => {const seletcedCategory = e.target.value
                                 setCategory(seletcedCategory);
@@ -66,7 +66,7 @@ const Users = observer(() => {
                             )}
                         </Form.Select>
                     </Col>
-                    <Col>
+                    <Col sm={12} md={4}>
                         <Form.Select aria-label="Default select example" 
                                 onChange={(e) => {const seletcedCategory = e.target.value
                                     setItemsPerPage(seletcedCategory);

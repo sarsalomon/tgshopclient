@@ -4,6 +4,7 @@ import { Container, Row, Col, Button, Form, FloatingLabel } from 'react-bootstra
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getUser, updateUser } from '../../http/userAPI';
+import { fetchCategories } from '../../http/productApi';
 import { useParams } from 'react-router';
 
 const UpdateUser = observer(() => {
@@ -11,19 +12,21 @@ const UpdateUser = observer(() => {
     const [fish,setFish] = useState('')
     const [phone,setPhone] = useState('')
     const [categoryId,setCategory] = useState('')
-    const [subcategoryId,setSubCategory] = useState('')
+    const [categories,setCategories] = useState([])
+    const [role,setRole] = useState('')
+
     const {id} = useParams()
     useEffect(() => {
         getUser(id).then(data => {
             setFish(data.fish)
             setPhone(data.phone)
         })
+        fetchCategories().then(data => setCategories(data))
     }, [])
 
-
     const updateU = () => {
-        updateUser(id,fish).then(data => {})
-        toast.info(`order.memberId`, {
+        updateUser(id,fish,role,categoryId).then(data => {})
+        toast.success(`Ma'lumotlar yangilandi`, {
             position: "bottom-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -37,41 +40,37 @@ const UpdateUser = observer(() => {
     return (
         <Container>
         <h2>Hodimni yangilash</h2>
-        <Form>
-            {/* <Row className="mb-4">
+        <Form>            
+            <Row className="mb-4">
                 <Col>
                     <Form.Select aria-label="Default select example" 
                         onChange={(e) => {const seletcedCategory = e.target.value
-                            setCategory(seletcedCategory);
+                                setCategory(seletcedCategory);
                         }}
                     >  
-                     <option value={''}>Category</option>
-                        {product.categories.map(category =>
-                            <option 
-                                value={category._id}
-                            >
-                                {category.titleRu}
-                            </option>
-                        )}
-                    </Form.Select>
+                        <option value={''}>Toifa</option>
+                            {categories.map(category =>
+                                <option 
+                                    value={category._id}
+                                >
+                                    {category.titleUz} - {category.titleRu}
+                                </option>
+                            )}
+                        </Form.Select>
                 </Col>
                 <Col>
-                <Form.Select aria-label="Default select example" 
-                        onChange={(e) => {const seletcedSubCategory = e.target.value
-                            setSubCategory(seletcedSubCategory);
+                    <Form.Select aria-label="Default select example" 
+                        onChange={(e) => {const seletcedRole = e.target.value
+                                setRole(seletcedRole);
                         }}
-                    >
-                     <option value={''}>Sub</option>
-                        {product.categories.map(category =>
-                            <option 
-                                value={category._id}
-                            >
-                                {category.titleRu}
-                            </option>
-                        )}
-                    </Form.Select>
+                    >  
+                        <option value={''}>Roli</option>
+                         <option value={'ISHCHI'}>Ishchi</option>
+                         <option value={'MANAGER'}>Manager</option>
+                         <option value={'ADMIN'}>Admin</option>
+                        </Form.Select>
                 </Col>
-            </Row>    */}
+            </Row>   
             <Row>
                 <Col>
                     <FloatingLabel
@@ -91,22 +90,6 @@ const UpdateUser = observer(() => {
                         <Form.Control type="text" value={phone} onChange={e=>setPhone(e.target.value)} />
                     </FloatingLabel>
                 </Col>
-            </Row>   
-            <Row>
-                {/* <Col>
-                    <Form.Group controlId="formFile" className="mb-3">
-                            <Form.Label>Img</Form.Label>
-                            <Form.Control type="file"  onChange={selectFile}/>
-                    </Form.Group> 
-                </Col> */}
-                {/* <Col>
-                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Label>Price</Form.Label>
-                        <Form.Control type="number"                    
-                        value={price}
-                        onChange={e=>setPrice(e.target.value)}/>
-                    </Form.Group>
-                </Col>     */}
             </Row>   
             <Row>
                 <Col className="float-right">

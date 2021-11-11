@@ -58,10 +58,10 @@ const Products = observer(() => {
         <div>
             <Container>
                 <Row>
-                    <Col>
+                    <Col sm={12} md={3}>
                     <NavLink to={ADD_PRODUCT_ROUTER}><Button variant='success'>Mahsulot qo`shish</Button></NavLink>
                     </Col>
-                    <Col>
+                    <Col sm={12} md={3}>
                         <Form.Select
                             onChange={(e) => {const seletcedCategory = e.target.value
                                 setCategory(seletcedCategory);
@@ -77,7 +77,7 @@ const Products = observer(() => {
                             )}
                         </Form.Select>
                     </Col>
-                    <Col>
+                    <Col sm={12} md={3}>
                     <Form.Select aria-label="Default select example" 
                             onChange={(e) => {const seletcedUser = e.target.value
                                 setUser(seletcedUser);
@@ -93,7 +93,7 @@ const Products = observer(() => {
                             )}
                         </Form.Select>
                     </Col>
-                    <Col>
+                    <Col sm={12} md={3}>
                         <Form.Select aria-label="Default select example" 
                                 onChange={(e) => {const seletcedCategory = e.target.value
                                     setItemsPerPage(seletcedCategory);
@@ -137,7 +137,7 @@ const Products = observer(() => {
                                     <td>{product.descriptionUz.length > 60 ? `${product.descriptionUz.substring(0, 60)}...` : product.descriptionUz}<br/>
                                         {product.descriptionRu.length > 60 ?`${product.descriptionRu.substring(0, 60)}...` : product.descriptionRu}</td>
                                     <td>{product.newprice}</td>
-                                    <td> <Image width={100} height={100} src={process.env.REACT_APP_API_URL + product.img} alt={product.titleUz + ' - ' + product.titleRu}/> </td>
+                                    <td> <Image width={100} height={100} src={process.env.REACT_APP_API_URL + 'api/' + product.img} alt={product.titleUz + ' - ' + product.titleRu}/> </td>
                                     <td>
                                         <Button variant="primary" onClick={() => history.push(GET_PRODUCT_ROUTER + '/'+product._id)}>Yangilash</Button>
                                         <Button variant="danger" className="ms-2" onClick={() => deleteP(product._id)}>O`chirish</Button>
