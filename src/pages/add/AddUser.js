@@ -113,7 +113,7 @@ const AddUser = observer(() => {
                     <Col>
                         <FloatingLabel
                             controlId="floatingInput"
-                            label="Phone"
+                            label="Telefon raqam"
                             className="mb-3"
                         >
                             <Form.Control type="text" value={phone} onChange={e=>setPhone(e.target.value)} />

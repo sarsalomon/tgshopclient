@@ -146,7 +146,7 @@ const Orders = observer(() => {
                             <th>Nomi</th>
                             <th>Toifa</th>
                             <th>Kim</th>
-                            <th>Manzil</th>
+                            <th>Mijoz raqami</th>
                             <th>Narxi</th>
                             <th>Holati</th>
                             <th>Harakat</th>
@@ -162,7 +162,7 @@ const Orders = observer(() => {
                                 <td>{order.categoryName}</td>
                                 <td>{order.productName}</td>
                                 <td>{order.userName}</td>
-                                <td>{order.newprice}</td>
+                                <td>{order.userPhone}</td>
                                 <td>{order.qty * order.newprice}</td>
                                 <td>{order.status}</td>
                                 <td>

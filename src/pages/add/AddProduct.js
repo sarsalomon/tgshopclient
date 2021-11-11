@@ -111,7 +111,7 @@ const AddProduct = observer(() => {
                     <Col>
                         <FloatingLabel
                             controlId="floatingInput"
-                            label="title UZ"
+                            label="Mahsulot nomi Uzbek tilida"
                             className="mb-3"
                         >
                             <Form.Control type="text" value={titleUz} onChange={e=>setTitleUz(e.target.value)} />
@@ -120,7 +120,7 @@ const AddProduct = observer(() => {
                     <Col>
                         <FloatingLabel
                             controlId="floatingInput"
-                            label="title RU"
+                            label="Mahsulot nomi Rus tilida"
                             className="mb-3"
                         >
                             <Form.Control type="text" value={titleRu} onChange={e=>setTitleRu(e.target.value)} />
@@ -135,14 +135,14 @@ const AddProduct = observer(() => {
                         </Form.Group> 
                     </Col>
                     <Col md={7}>
-                    <Form.Label>Price</Form.Label>
+                    <Form.Label>Narhi</Form.Label>
                         <InputGroup className="mb-3">
                             <FormControl type="text" value={price} onChange={e=>setPrice(e.target.value)} />
                         </InputGroup>
                     </Col>
                 </Row>   
                 <Form.Label>Uz</Form.Label>
-                <FloatingLabel controlId="floatingTextarea2" label="Comments">
+                <FloatingLabel controlId="floatingTextarea2" label="Mahsulot tarifi Uzbek tilida">
                     <Form.Control
                     as="textarea"
                     placeholder="Leave a comment here"
@@ -152,7 +152,7 @@ const AddProduct = observer(() => {
                     />
                 </FloatingLabel>
                 <Form.Label>Ru</Form.Label>
-                <FloatingLabel controlId="floatingTextarea2" label="Comments">
+                <FloatingLabel controlId="floatingTextarea2" label="Mahsulot tarifi Rus tilida">
                     <Form.Control
                     as="textarea"
                     placeholder="Leave a comment here"

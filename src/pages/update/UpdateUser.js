@@ -75,16 +75,16 @@ const UpdateUser = observer(() => {
                 <Col>
                     <FloatingLabel
                                 controlId="floatingInput"
-                                label="Category RU"
+                                label="FISH"
                                 className="mb-3"
                     >
-                        <Form.Control placeholder="name@example.com" value={fish} onChange={e => setFish(e.target.value)}/>
+                        <Form.Control value={fish} onChange={e => setFish(e.target.value)}/>
                     </FloatingLabel>
                 </Col>
                 <Col>
                     <FloatingLabel
                         controlId="floatingInput"
-                        label="Fish"
+                        label="Telefon raqam"
                         className="mb-3"
                     >
                         <Form.Control type="text" value={phone} onChange={e=>setPhone(e.target.value)} />

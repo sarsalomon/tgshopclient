@@ -43,19 +43,19 @@ const UpdateCategory = observer(() => {
                         <Col>
                             <FloatingLabel
                                 controlId="floatingInput"
-                                label="Category RU"
+                                label="Uzbek tilida Toifa nomi"
                                 className="mb-3"
                             >
-                                <Form.Control placeholder="name@example.com" value={titleUz} onChange={e => setTitleUz(e.target.value)}/>
+                                <Form.Control value={titleUz} onChange={e => setTitleUz(e.target.value)}/>
                             </FloatingLabel>
                         </Col>
                         <Col>
                             <FloatingLabel
                                 controlId="floatingInput"
-                                label="Category RU"
+                                label="Rus tilida Toifa nomi"
                                 className="mb-3"
                             >
-                                <Form.Control placeholder="name@example.com" value={titleRu} onChange={e => setTitleRu(e.target.value)}/>
+                                <Form.Control value={titleRu} onChange={e => setTitleRu(e.target.value)}/>
                             </FloatingLabel>
                         </Col>
                     </Row>   

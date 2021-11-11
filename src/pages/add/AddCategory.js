@@ -30,21 +30,21 @@ const AddCategory = () => {
                     <Col>
                         <FloatingLabel
                             controlId="floatingInput"
-                            label="Category UZ"
+                            label="Uzbek tilida Toifa nomi"
                             value={titleUz}
                             onChange={e => setTitleUz(e.target.value)}
                             className="mb-3">
-                            <Form.Control  type="text" placeholder="name@example.com" />
+                            <Form.Control  type="text" placeholder="Elektrik" />
                         </FloatingLabel>
                     </Col>
                     <Col>
                         <FloatingLabel
                             controlId="floatingInput"
-                            label="Category RU"
+                            label="Rus tilida Toifa nomi"
                             value={titleRu}
                             onChange={e => setTitleRu(e.target.value)}
                             className="mb-3">
-                            <Form.Control type="text" placeholder="name@example.com" />
+                            <Form.Control type="text" placeholder="Электрик" />
                         </FloatingLabel>
                     </Col>
                 </Row>   

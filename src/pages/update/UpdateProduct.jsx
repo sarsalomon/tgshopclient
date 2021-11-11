@@ -109,7 +109,7 @@ const UpdateProduct = observer(() => {
                 <Col>
                     <FloatingLabel
                         controlId="floatingInput"
-                        label="title UZ"
+                        label="Mahsulot nomi Uzbek tilida"
                         className="mb-3"
                         >
                         <Form.Control type="text" value={titleUz}  onChange={e=>setTitleUz(e.target.value)}/>
@@ -118,10 +118,10 @@ const UpdateProduct = observer(() => {
                 <Col>
                     <FloatingLabel
                         controlId="floatingInput"
-                        label="title RU"
+                        label="Mahsulot nomi Rus tilida"
                         className="mb-3"
                        >
-                        <Form.Control type="text"  value={titleRu} onChange={e=>setTitleRu(e.target.value)}/>
+                        <Form.Control type="text" value={titleRu} onChange={e=>setTitleRu(e.target.value)}/>
                     </FloatingLabel>
                 </Col>
             </Row>   
@@ -140,7 +140,7 @@ const UpdateProduct = observer(() => {
                 </Col>
                 </Row>  
             <Form.Label>Uz</Form.Label>
-            <FloatingLabel controlId="floatingTextarea2" label="Comments">
+            <FloatingLabel controlId="floatingTextarea2" label="Mahsulot tarifi Uzbek tilida">
                 <Form.Control
                 as="textarea"
                 placeholder="Leave a comment here"
@@ -150,7 +150,7 @@ const UpdateProduct = observer(() => {
                 />
             </FloatingLabel>
             <Form.Label>Ru</Form.Label>
-            <FloatingLabel controlId="floatingTextarea2" label="Comments">
+            <FloatingLabel controlId="floatingTextarea2" label="Mahsulot tarifi Rus tilida">
                 <Form.Control
                 as="textarea"
                 placeholder="Leave a comment here"
